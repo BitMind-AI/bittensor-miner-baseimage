@@ -9,7 +9,7 @@ The `bittensor-miner-baseimage` is designed to serve as a foundational Docker im
 To use this base image, specify it as the starting point in your Dockerfile for a custom Bittensor miner:
 
 ```Dockerfile
-FROM bittensor-miner-baseimage:latest
+FROM ghcr.io/bitmind-ai/bittensor-miner:latest
 ```
 
 Follow with customizations specific to your miner, such as adding environment variables, copying miner code, or installing additional dependencies.
@@ -26,7 +26,7 @@ Example customization for a subtensor:
 
 ```Dockerfile
 # Start from the base image
-FROM bittensor-miner-baseimage:latest
+FROM ghcr.io/bitmind-ai/bittensor-miner:latest
 
 # Set environment variables for the subtensor
 ENV SUBTENSOR_NETWORK=your_network_name
