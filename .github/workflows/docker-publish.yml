@@ -1,0 +1,46 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        platforms: ['linux/amd64']
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Miner Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/bitmind-ai/bittensor-miner:latest
+            ghcr.io/bitmind-ai/bittensor-miner:${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/bitmind-ai/bittensor-miner
+            org.opencontainers.image.description=BitMind image for Bittensor miner
+          platforms: ${{ matrix.platforms }}
+
+
