@@ -47,6 +47,6 @@ jobs:
           labels: |
             org.opencontainers.image.source=https://github.com/bitmind-ai/bittensor-miner
             org.opencontainers.image.description=BitMind image for Bittensor miner
-          platforms: ${{ matrix.platforms }}
+          platforms: linux/amd64, linux/arm64
 
 
