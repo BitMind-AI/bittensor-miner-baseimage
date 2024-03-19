@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 
 # install git, Python, pip, and virtualenv
 RUN apt update && apt upgrade -y && \
-    apt install git-all python3-pip python3-venv -y && \
+    apt install wget git-all python3-pip python3-venv -y && \
     rm -rf /var/lib/apt/lists/*
 
 # disable pip cache
